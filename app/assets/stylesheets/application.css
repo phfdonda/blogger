@@ -13,3 +13,15 @@
  *= require_tree .
  *= require_self
  */
+
+.article_title {
+  font-size: 48px;
+  color: blue;
+}
+
+a.new_article {
+  box-sizing: border-box;
+  text-decoration: none;
+  font-size: 24px;
+  color: green;
+}
