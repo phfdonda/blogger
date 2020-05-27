@@ -3,6 +3,7 @@
 class AuthorsController < ApplicationController
   before_action :set_author, only: %i[show edit update destroy]
   before_action :zero_authors_or_authenticated, only: %i[new create]
+  before_action :require_login, except: %i[new create]
 
   def zero_authors_or_authenticated
     unless Author.count == 0 || current_user
