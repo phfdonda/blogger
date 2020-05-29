@@ -20,7 +20,10 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
+    @article.author_id = params[:author_id]
+    @article.author_name = params[:author_name]
     @article.save
+    byebug
     flash.notice = "Article #{@article.title} was successfully created!"
     redirect_to article_path(@article)
   end

@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_27_201354) do
+ActiveRecord::Schema.define(version: 2020_05_29_191434) do
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "body"
-    t.integer "author_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image_file_name"
     t.string "image_content_type"
     t.integer "image_file_size"
     t.datetime "image_updated_at"
-    t.index ["author_id"], name: "index_articles_on_author_id"
+    t.integer "author_id"
+    t.string "author_name"
   end
 
   create_table "authors", force: :cascade do |t|
@@ -30,10 +30,8 @@ ActiveRecord::Schema.define(version: 2020_05_27_201354) do
     t.string "email", null: false
     t.string "crypted_password", null: false
     t.string "salt", null: false
-    t.integer "articles_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["articles_id"], name: "index_authors_on_articles_id"
     t.index ["email"], name: "index_authors_on_email", unique: true
   end
 
@@ -61,8 +59,6 @@ ActiveRecord::Schema.define(version: 2020_05_27_201354) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "articles", "authors"
-  add_foreign_key "authors", "articles", column: "articles_id"
   add_foreign_key "comments", "articles"
   add_foreign_key "taggings", "articles"
   add_foreign_key "taggings", "tags"
