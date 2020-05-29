@@ -20,7 +20,6 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    @article.author_id = Author.find(params[:id])
     @article.save
     flash.notice = "Article #{@article.title} was successfully created!"
     redirect_to article_path(@article)
