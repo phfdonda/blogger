@@ -5,6 +5,7 @@ class SorceryCore < ActiveRecord::Migration[6.0]
       t.string :email,            null: false
       t.string :crypted_password, null: false
       t.string :salt,            null: false
+      t.references :articles, foreign_key: true
 
       t.timestamps                null: false
     end

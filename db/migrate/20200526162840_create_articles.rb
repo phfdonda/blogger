@@ -3,7 +3,7 @@ class CreateArticles < ActiveRecord::Migration[6.0]
     create_table :articles do |t|
       t.string :title
       t.text :body
-      t.integer :article_author
+      t.references :author, foreign_key: true
 
       t.timestamps
     end
