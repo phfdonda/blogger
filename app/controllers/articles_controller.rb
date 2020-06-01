@@ -2,7 +2,13 @@
 
 class ArticlesController < ApplicationController
   include ArticlesHelper
+  before_action :same_author_of_article, except: [:show, :index, :new]
   before_action :require_login, except: [:show, :index]
+
+  def same_author_of_article
+    @article = Article.find(params[:id])
+    @article.author_id == current_user.id
+  end
 
   def index
     @articles = Article.all
@@ -20,6 +26,8 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
+    @article.author_id = current_user.id
+    @article.author_name = current_user.username
     @article.save
     flash.notice = "Article #{@article.title} was successfully created!"
     redirect_to article_path(@article)
