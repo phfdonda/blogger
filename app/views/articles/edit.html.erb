@@ -1,2 +1,7 @@
 <h1>Edit an Article</h1>
-<%= render partial: 'form'%>
+<% if logged_in? && @article.author_id == current_user.id %>
+  <%= render partial: 'form'%>
+<% else %>
+  <% flash.notice = "Only the author of this article is allowed to edit it" %>
+  <%= link_to "<< Go back to all articles", articles_path %>
+<% end %>

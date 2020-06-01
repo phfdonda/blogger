@@ -2,7 +2,13 @@
 
 class ArticlesController < ApplicationController
   include ArticlesHelper
+  before_action :same_author_of_article, except: [:show, :index, :new]
   before_action :require_login, except: [:show, :index]
+
+  def same_author_of_article
+    @article = Article.find(params[:id])
+    @article.author_id == current_user.id
+  end
 
   def index
     @articles = Article.all
