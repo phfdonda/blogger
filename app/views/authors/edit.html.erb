@@ -1,6 +1,12 @@
 <h1>Editing Author</h1>
 
-<%= render 'form', author: @author %>
+<% if logged_in? && @author.author_id == current_user.id %>
+  <%= render partial: 'form', author: @author %>
+<% else %>
+  <% flash.notice = "Only the author can edit their information" %>
+  <%= link_to "<< Go back to all articles", articles_path %>
+<% end %>
 
 <%= link_to 'Show', @author %> |
 <%= link_to 'Back', authors_path %>
+
